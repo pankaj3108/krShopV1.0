@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+    <head>
+        <link rel="shortcut icon" href="{% static 'images/ershop_logo.ico' %}" type="image/x-icon" />
+        <title>Kishan Rashan Shop</title>
+
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+        <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1" />
+
+        <script type="text/javascript">
+            var user = '{{ request.user }}'
+
+            function getCookie(name) {
+                let cookieValue = null;
+                if (document.cookie && document.cookie !== '') {
+                    const cookies = document.cookie.split(';');
+                    for (let i = 0; i < cookies.length; i++) {
+                        const cookie = cookies[i].trim();
+                        if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                            cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                            break;
+                        }
+                    }
+                }
+                return cookieValue;
+            }
+        const csrftoken = getCookie('csrftoken');
+        </script>
+
+    </head>
+    <body>
+        <nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-dark">
+          <a class="navbar-brand" href="{% url 'store' %}">KRShop</a>
+
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+              <li class="nav-item active">
+                <a class="nav-link" href="{% url 'store' %}">Store</a>
+              </li>
+              <li class="nav-item active">
+                <a class="nav-link" href="{% url 'about' %}">About</a>
+              </li>
+            </ul>
+            <div class="form-inline my-2 my-lg-0">
+                {% if user.is_authenticated %}
+                <li style="list-style: none; margin-right: 18px;">Hello, <a href="#" style="color: beige; ">{{ user.customer.name }} </a></li>
+                <a href="{% url 'logout' %}" class="btn btn-warning"> Logout</a>
+                {% else %}
+                <a href="{% url 'login' %}" class="btn btn-warning">Login</a>
+                {% endif %}
+                <a href="{% url 'cart' %}">
+                    <img id="cart-icon" src="{% static 'images/cart-image.png' %}">
+                </a>
+                {% if user.is_authenticated %}
+                        <p id="cart-total">{{ cartItems }}</p>
+                {% endif %}
+            </div>
+          </div>
+        </nav>
+        <div class="container">
+            {% block content %}
+
+            {% endblock content %}
+
+        </div>
+
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
+
+    <script type="text/javascript" src="{% static 'js/cart.js' %}">
+
+    </script>
+
+    </body>
+</html>

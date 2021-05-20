@@ -1,0 +1,33 @@
+{% extends 'store/main.html' %}
+{% load static %}
+{% block content %}
+    <br>
+        <br>
+        <br>
+        <br>
+    <h2 style="text-align: center;">Register Yourself</h2>
+    <hr>
+    <br>
+    <form action="{% url 'register' %}" method="POST">
+    {% csrf_token %}
+        <div class="form-group">
+            <label for="exampleUsername">Enter Your Username<span style="color: red;">*</span></label>
+            <input type="text" class="form-control" id="exampleUsername" name="username" placeholder="username" required><br>
+            <label for="examplePass1">Enter Your Password<span style="color: red;">*</span></label>
+            <input type="password" class="form-control" id="examplePass1" name="password1" placeholder="password" required><br>
+            <label for="examplePass2">Re-enter Your Password<span style="color: red;">*</span></label>
+            <input type="password" class="form-control" id="examplePass2" name="password2" placeholder="password" required><br>
+            <label for="exampleName">Enter Your Name</label>
+            <input type="text" class="form-control" id="exampleName" name="name" placeholder="name"><br>
+            <label for="exampleEmail">Enter Your Email<span style="color: red;">*</span></label>
+            <input type="email" class="form-control" id="exampleEmail" name="email" placeholder="e-mail" required><br>
+            <br>
+            <input type="submit" class="btn btn-primary" value="Register">
+        </div>
+    </form>
+    <div>
+        {% for message in messages %}
+            <h3>{{ message }}</h3>
+        {% endfor %}
+    </div>
+{% endblock content %}

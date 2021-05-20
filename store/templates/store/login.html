@@ -1,0 +1,30 @@
+{% extends 'store/main.html' %}
+{% load static %}
+{% block content %}
+    <br>
+    <br>
+    <br>
+    <br>
+    <h1>Log In </h1>
+    <hr>
+    <br>
+    <br>
+
+    <form action="{% url 'login' %}" method="POST">
+        {% csrf_token %}
+        <div>
+        {% for message in messages %}
+            <h3>{{ message }}</h3>
+        {% endfor %}
+        </div>
+        <div class="form-group">
+            <label for="examuser">Enter Your Username</label>
+            <input type="text" class="form-control" id="examuser" name="username" placeholder="username"><br>
+            <label for="exampass">Enter Your Password</label>
+            <input type="password" class="form-control" id="exampass" name="password" placeholder="password"><br>
+            <input type="submit" class="btn btn-primary" value="Login">
+        </div>
+        
+    </form>
+    <span>New to KRShop? </span><a href="{% url 'register' %}">Register</a>
+{% endblock content %}

@@ -1,0 +1,17 @@
+{% extends 'store/main.html' %}
+{% load static %}
+{% block content %}
+    <br>
+        <br>
+        <br>
+        <br>
+    <h2>Product Detail</h2>
+    <hr>
+    <br>
+    <br>
+    {% for product in data %}
+        <img class="row-image" src="{{ product.imageURL }}">
+        <h3>{{ product.name }}</h3>
+        <h4>{{ product.price }}</h4>
+    {% endfor %}
+{% endblock content %}
